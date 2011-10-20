@@ -10,12 +10,17 @@ import sys
 import os
 import unittest
 
-import exceptions
+import exceptions, types
 import platform
 
 import httplib2
 import urllib
-import simplejson as json
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
 import types
 
 from pprint import pprint

@@ -1,3 +1,4 @@
+# encoding: utf-8
 ###
 # Copyright (c) 2011, Brian Lalor
 # All rights reserved.
@@ -73,7 +74,19 @@ class Rally(callbacks.PluginRegexp):
                 
                 artifact = rq.findArtifactByFormattedId(rallyId, artifact_type)
                 
-                irc.reply("[%s] %s" % (rallyId, artifact[u'Name']))
+                maybe_blocked = ""
+                
+                if u'Blocked' in artifact and artifact[u'Blocked']:
+                    maybe_blocked = ", Blocked"
+                
+                if artifact[u'_type'] in (u'Task',):
+                    state = artifact[u'State']
+                elif artifact[u'_type'] in (u'HierarchicalRequirement', u'Defect'):
+                    state = artifact[u'ScheduleState']
+                
+                reply_msg = u"[%s] %s ⪼ (%s%s)" % (rallyId, artifact[u'Name'], state, maybe_blocked)
+                
+                irc.reply(reply_msg, prefixNick = False, notice = True)
             except rally_rest.RallyError, e:
                 self.log.error("unable to look up %s", rallyId, exc_info = True)
             

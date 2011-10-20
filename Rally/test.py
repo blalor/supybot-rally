@@ -1,3 +1,4 @@
+# encoding: utf-8
 ###
 # Copyright (c) 2011, Brian Lalor
 # All rights reserved.
@@ -47,7 +48,7 @@ class RallyTestCase(ChannelPluginTestCase):
         try:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(True)
             self.assertSnarfResponse('US42859',
-                                     '[US42859] Access Code Self-Reg handoff to Localizations team')
+                                     '[US42859] Access Code Self-Reg handoff to Localizations team ⪼ (In-Progress)')
                                      
         
         finally:
@@ -61,7 +62,7 @@ class RallyTestCase(ChannelPluginTestCase):
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(True)
                                      
             self.assertSnarfResponse('yo, dawg, i heard you like user stories in your user stories so i added a user story to your US40312 user story',
-                                     '[US40312] RADmin: CreateUser screen - Modification (UI+Service)')
+                                     '[US40312] RADmin: CreateUser screen - Modification (UI+Service) ⪼ (In-Progress)')
         
         finally:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(False)
@@ -73,7 +74,19 @@ class RallyTestCase(ChannelPluginTestCase):
         try:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(True)
             self.assertSnarfResponse('DE9395',
-                                     '[DE9395] CAS: Consenting to license agreement or Resetting password results in System error')
+                                     '[DE9395] CAS: Consenting to license agreement or Resetting password results in System error ⪼ (Defined)')
+        
+        finally:
+            conf.supybot.plugins.Rally.snarfRallyIDs.setValue(False)
+    
+    
+    def testBlockedDefect(self):
+        """checks that a valid defect title is looked up"""
+        
+        try:
+            conf.supybot.plugins.Rally.snarfRallyIDs.setValue(True)
+            self.assertSnarfResponse('DE8977',
+                                     '[DE8977] Access Code Self Reg: UI is not rendered properly when the labels or links exceed a certain length ⪼ (Backlog, Blocked)')
         
         finally:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(False)
@@ -85,7 +98,7 @@ class RallyTestCase(ChannelPluginTestCase):
         try:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(True)
             self.assertSnarfResponse('TA123205',
-                                     '[TA123205] SQE - Test Planning and Design')
+                                     '[TA123205] SQE - Test Planning and Design ⪼ (Defined)')
         
         finally:
             conf.supybot.plugins.Rally.snarfRallyIDs.setValue(False)

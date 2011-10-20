@@ -43,7 +43,7 @@ class RallyError(exceptions.Exception):
 
 class RallyQuery(object):
     def __init__(self, username, password):
-        self.__httpConn = httplib2.Http(disable_ssl_certificate_validation = True)
+        self.__httpConn = httplib2.Http("rally_rest.cache", disable_ssl_certificate_validation = True)
         self.__httpConn.add_credentials(username, password)
     
     

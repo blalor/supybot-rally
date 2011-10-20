@@ -2,3 +2,4 @@
 test-conf/
 test-logs/
 backup/
+rally_rest.cache/

@@ -1,0 +1,4 @@
+*.pyc
+test-conf/
+test-logs/
+backup/
